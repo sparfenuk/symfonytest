@@ -22,15 +22,25 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
 
-            <a class="navbar-brand" href="{{ path('first') }}">Home</a>
+            <a class="navbar-brand" href="{{ path('error') }}">Home</a>
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('first_page') }}">Welcome</a>
+                        <a class="nav-link" href="{{ path('error') }}">Welcome</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                        <a class="nav-link" href="{{ path('error') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('error') }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('error') }}">Logout</a>
                     </li>
                 </ul>
             </div>
