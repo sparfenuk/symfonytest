@@ -1,0 +1,61 @@
+{% extends 'form_base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <form name="login" method="post">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'login') }}</div>
+        {% endif %}
+        <div id="login">
+            <div class="form-group row">
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            </div>
+            <div class="form-group row">
+                <label for="inputUsername" class="col-form-label col-sm-2 required">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                           class="form-control"
+                           placeholder="Username" required autofocus>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputPassword" class="col-form-label col-sm-2 required">Password</label>
+                <div class="col-sm-10">
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                           placeholder="Password"
+                           required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me   /    <a href="{{ path('forgot') }}">Forgot password?</a>
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <div class="g-recaptcha" data-sitekey="6Ld85KcUAAAAAHnCC2p8ONtsvz833uXWRqZsW63Y"></div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <button id="login_login" name="login[login]" class="btn btn-success btn" type="submit">
+                    Sign in
+                </button>
+            </div>
+        </div>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+            </div>
+        </div>
+    </form>
+{% endblock %}

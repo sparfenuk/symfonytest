@@ -1,15 +1,21 @@
 {% extends 'form_base.html.twig' %}
 
-{% block title %}Registration!{% endblock %}
+{% block title %}Create your new post!{% endblock %}
 
 {% block body %}
-
     {{ form_start(form) }}
+
     {{ form_widget(form) }}
+{#    <div class="form-group row">#}
+{#        <div class="col-sm-2"></div>#}
+{#        <div class="col-sm-10">#}
+{#            <label> Upload Image:</label><br>#}
+{#            <input type="file" id="post_image" name="post[image]" accept="image/*"/>#}
+{#        </div>#}
+{#    </div>#}
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-
     <div class="form-group row">
         <div class="col-sm-2"></div>
         <div class="col-sm-10">
@@ -21,12 +27,9 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-10">
             <button class="btn btn-success btn" type="submit">
-                Confirm
+                Create
             </button>
         </div>
     </div>
     {{ form_end(form) }}
-
-
-
 {% endblock %}

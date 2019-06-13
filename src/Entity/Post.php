@@ -3,9 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
+ *
  */
 class Post
 {
@@ -19,33 +20,57 @@ class Post
     /**
      * @ORM\Column(type="integer")
      */
-    private $author_id;
+    private $authorId;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $verified_admin_id;
+    private $verifiedAdminId;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     *
      */
-    private $photo_name;
+    private $photoName;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=2048)
      */
     private $text;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+
+     */
+    private $author;
+    /**
+     * @return User
+     */
+    public function getAuthor():User
+    {
+        return $this->author;
+    }
+
+
+
+    public function __construct()
+    {
+        $dt = new \DateTime();
+
+        $this->setCreatedAt($dt);
+        $this->setUpdatedAt($dt);
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -60,60 +85,60 @@ class Post
 
     public function getAuthorId(): ?int
     {
-        return $this->author_id;
+        return $this->authorId;
     }
 
-    public function setAuthorId(int $author_id): self
+    public function setAuthorId(int $authorId): self
     {
-        $this->author_id = $author_id;
+        $this->authorId = $authorId;
 
         return $this;
     }
 
     public function getVerifiedAdminId(): ?int
     {
-        return $this->verified_admin_id;
+        return $this->verifiedAdminId;
     }
 
-    public function setVerifiedAdminId(int $verified_admin_id): self
+    public function setVerifiedAdminId(int $verifiedAdminId): self
     {
-        $this->verified_admin_id = $verified_admin_id;
+        $this->verifiedAdminId = $verifiedAdminId;
 
         return $this;
     }
 
     public function getPhotoName(): ?string
     {
-        return $this->photo_name;
+        return $this->photoName;
     }
 
-    public function setPhotoName(?string $photo_name): self
+    public function setPhotoName(?string $photoName): self
     {
-        $this->photo_name = $photo_name;
+        $this->photoName = $photoName;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

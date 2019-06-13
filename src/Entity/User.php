@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Controller\AppController;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -55,12 +57,13 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=32)
      */
-    private $auth_key;
+    private $authKey;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $photo_name;
+
+//    /**
+//     * @ORM\Column(type="string", length=255, nullable=true)
+//     */
+//    private $photo_name;
 
     /**
      * @ORM\Column(type="string", length=45)
@@ -75,20 +78,55 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+    private $updatedAt;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post" , mappedBy="User")
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+        $dt = new \DateTime();
+        $this->setAuthKey(AppController::generateRandomString(30));
+        $this->setCreatedAt($dt);
+        $this->setUpdatedAt($dt);
+        $this->setIp('127.0.0.1');
+        $this->setBrowser('Chrome');
+
+    }
     public function getRoles()
     {
-        return [
-            'ROLE_USER',
-            'ROLE_ADMIN',
-            'ROLE_MODERATOR'
-        ];
+
+        switch ($this->status){
+            case 0:
+            case 1:
+              return [
+                  'ROLE_USER'
+              ];
+                break;
+            case 2:
+               return [
+                   //'ROLE_USER',
+                   'ROLE_MODERATOR'
+               ];
+                break;
+            case 3:
+                return [
+                   //'ROLE_USER',
+                   // 'ROLE_MODERATOR',
+                    'ROLE_ADMIN'
+                ];
+                break;
+
+        }
     }
 
     public function getSalt()
@@ -109,12 +147,12 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->email,
             $this->status,
-            $this->auth_key,
-            $this->photo_name,
+            $this->authKey,
+           // $this->photo_name,
             $this->ip,
             $this->browser,
-            $this->created_at,
-            $this->updated_at,
+            $this->createdAt,
+            $this->updatedAt,
         ]);
     }
 
@@ -125,14 +163,19 @@ class User implements UserInterface, \Serializable
             $this->password,
             $this->email,
             $this->status,
-            $this->auth_key,
-            $this->photo_name,
+            $this->authKey,
+            //$this->photo_name,
             $this->ip,
             $this->browser,
-            $this->created_at,
-            $this->updated_at,) = unserialize($serialized);
+            $this->createdAt,
+            $this->updatedAt,) = unserialize($serialized);
     }
 
+
+    public function getRole(): ?int
+    {
+        return $this->status;
+    }
 
     public function getId(): ?int
     {
@@ -141,7 +184,7 @@ class User implements UserInterface, \Serializable
 
     public function setId(int $Id): self
     {
-        $this->Id = $Id;
+        $this->id = $Id;
 
         return $this;
     }
@@ -182,7 +225,27 @@ class User implements UserInterface, \Serializable
 
     public function getStatus()
     {
-        return $this->status;
+        //return $this->status;
+        switch ($this->status){
+            case 0:
+            case 1:
+                return 'ROLE_USER';
+                break;
+            case 2:
+
+                    //'ROLE_USER',
+                   return 'ROLE_MODERATOR';
+
+                break;
+            case 3:
+
+                    //'ROLE_USER',
+                    // 'ROLE_MODERATOR',
+                    return 'ROLE_ADMIN';
+
+                break;
+
+        }
     }
 
     public function setStatus($status): void
@@ -193,12 +256,12 @@ class User implements UserInterface, \Serializable
 
     public function getAuthKey(): ?string
     {
-        return $this->auth_key;
+        return $this->authKey;
     }
 
-    public function setAuthKey(string $auth_key): self
+    public function setAuthKey(string $authKey): self
     {
-        $this->auth_key = $auth_key;
+        $this->authKey = $authKey;
 
         return $this;
     }
@@ -229,38 +292,48 @@ class User implements UserInterface, \Serializable
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getPhotoName(): ?string
+    /**
+     * @return ArrayCollection
+     */
+    public function getPosts()
     {
-        return $this->photo_name;
+        return $this->posts;
     }
 
-    public function setPhotoName(string $photo_name): self
-    {
-        $this->photo_name = $photo_name;
 
-        return $this;
-    }
+
+//    public function getPhotoName(): ?string
+//    {
+//        return $this->photo_name;
+//    }
+//
+//    public function setPhotoName(string $photo_name): self
+//    {
+//        $this->photo_name = $photo_name;
+//
+//        return $this;
+//    }
 
 }

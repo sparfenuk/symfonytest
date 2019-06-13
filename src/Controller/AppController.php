@@ -24,7 +24,7 @@ class AppController extends AbstractController
     }
 
     // http://www.php.net/manual/en/function.get-browser.php#101125
-    function getBrowser() {
+    public static function getBrowser() {
         $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $bname = 'Unknown';
         $platform = 'Unknown';

@@ -5,9 +5,21 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    app.myParam: 'parameter'
+    image_dir: '%kernel.project_dir%/public/images'
+
 
 services:
+    admin.user:
+        class: App\Admin\UserAdmin
+        arguments: [~, App\Entity\User, App\Controller\UserAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: User }
+
+    admin.post:
+        class: App\Admin\PostAdmin
+        arguments: [~, App\Entity\Post, App\Controller\PostAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Post }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -24,6 +36,7 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
