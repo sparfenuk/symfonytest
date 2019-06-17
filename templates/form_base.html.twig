@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}Blog{% endblock %}</title>
+    <title>{% block title %}{{ 'Blog'| trans }}{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet"
@@ -33,26 +33,64 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container">
 
-            <a class="navbar-brand" href="{{ path('error') }}">Home</a>
+            <a class="navbar-brand" href="{{ path('show_posts',{'page': 1}) }}">{{ 'Home' | trans }}</a>
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('error') }}">Welcome</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('error') }}">Contact</a>
-                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('create_post') }}">{{ 'Create post' | trans }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('user_posts') }}">{{ 'My posts' | trans }}</a>
+                        </li>
+                        {% if is_granted('ROLE_MODERATOR') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{path('sonata_admin_dashboard') }}">{{ 'Admin panel' | trans }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 </ul>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('profile') }}">{{ 'Profile' | trans }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">{{ 'Logout' | trans }}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">{{ 'Login' | trans }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('registration') }}">{{ 'Create new account' | trans }}</a>
+                        </li>
+                    {% endif %}
+
+
+
+
+                    {% set req = app.request %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('error') }}">Profile</a>
+                        <a class="nav-link" href="{{ absolute_url(
+                            path(
+                                req.attributes.get('_route'),
+                                req.attributes.get('_route_params')|merge({'_locale': 'en'})
+                            )
+                        ) }}">eng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        <a class="nav-link" href="{{absolute_url(
+                            path(
+                                req.attributes.get('_route'),
+                                req.attributes.get('_route_params')|merge({'_locale': 'ua'})
+                            )
+                        ) }}">ukr</a>
                     </li>
+
                 </ul>
             </div>
         </div>

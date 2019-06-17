@@ -24,7 +24,10 @@ class PostAdminController extends CRUDController
 
         $object->setVerifiedAdminId($this->get('security.token_storage')->getToken()->getUser()->getId());
 
+        $this->admin->update($object);
+
         $this->addFlash('success', 'successfully verified');
+
 
         return new RedirectResponse(
             $this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()])

@@ -2,7 +2,221 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="ua" datatype="plaintext" original="file.ext">
         <body>
+            <trans-unit id="menu.signin">
+                <source>Sign in</source>
+                <target>Уввійти</target>
+            </trans-unit>
+            <trans-unit id="menu.signout">
+                <source>Sign out</source>
+                <target>Вийти</target>
+            </trans-unit>
+            <trans-unit id="menu.notifications">
+                <source>Notifications</source>
+                <target>Повідомлення</target>
+            </trans-unit>
+            <trans-unit id="menu.add">
+                <source>Add new</source>
+                <target>Створити новий</target>
+            </trans-unit>
+            <trans-unit id="post.recent">
+                <source>Recent updates</source>
+                <target>Недавні оновлення</target>
+            </trans-unit>
+            <trans-unit id="register.terms">
+                <source>I agree to the terms of service</source>
+                <target>Я погоджуюсь із правилами користування</target>
+            </trans-unit>
+            <trans-unit id="register.username">
+                <source>Username</source>
+                <target>Нікнейм</target>
+            </trans-unit>
+            <trans-unit id="register.password">
+                <source>Password</source>
+                <target>Пароль</target>
+            </trans-unit>
+            <trans-unit id="register.repeated_password">
+                <source>Repated password</source>
+                <target>Повторіть пароль</target>
+            </trans-unit>
+            <trans-unit id="register.full_name">
+                <source>Full name</source>
+                <target>Ім'я та по-батькові</target>
+            </trans-unit>
+            <trans-unit id="register.register">
+                <source>Register</source>
+                <target>Зареєструватися</target>
+            </trans-unit>
+            <trans-unit id="notifications.none">
+                <source>You have not notifications</source>
+                <target>У вас немає повідомлень</target>
+            </trans-unit>
+            <trans-unit id="posts.blog">
+                <source>Blog</source>
+                <target>Блог</target>
+            </trans-unit>
+            <trans-unit id="posts.home">
+                <source>Home</source>
+                <target>Головна</target>
+            </trans-unit>
+            <trans-unit id="posts.welcome">
+                <source>Welcome</source>
+                <target>Вітаємо</target>
+            </trans-unit>
 
+            <trans-unit id="posts.Contact">
+                <source>Contact</source>
+                <target>Зв'язок</target>
+            </trans-unit>
+            <trans-unit id="posts.profile">
+                <source>Profile</source>
+                <target>Мій профіль</target>
+            </trans-unit>
+            <trans-unit id="posts.logout">
+                <source>Logout</source>
+                <target>Вийти</target>
+            </trans-unit>
+            <trans-unit id="posts.latest">
+                <source>Latest posts</source>
+                <target>Останні пости</target>
+            </trans-unit>
+            <trans-unit id="posts.obdate">
+                <source>Order by: date</source>
+                <target>Сортувати за: датою додавання</target>
+            </trans-unit>
+            <trans-unit id="posts.obusername">
+                <source>Order by: username</source>
+                <target>Сортувати за: нікнеймом</target>
+            </trans-unit>
+            <trans-unit id="posts.obemail">
+                <source>Order by: email</source>
+                <target>Сортувати за: поштою</target>
+            </trans-unit>
+            <trans-unit id="posts.image">
+                <source>Image</source>
+                <target>Картинка</target>
+            </trans-unit>
+            <trans-unit id="posts.author">
+                <source>Author</source>
+                <target>Автор</target>
+            </trans-unit>
+            <trans-unit id="posts.email">
+                <source>Email</source>
+                <target>Пошта</target>
+            </trans-unit>
+            <trans-unit id="posts.text">
+                <source>Text</source>
+                <target>Зміст</target>
+            </trans-unit>
+            <trans-unit id="posts.created">
+                <source>Created</source>
+                <target>Створено</target>
+            </trans-unit>
+            <trans-unit id="posts.prev25">
+                <source>Prev 25</source>
+                <target>Попередні 25</target>
+            </trans-unit>
+            <trans-unit id="posts.next25">
+                <source>Next 25</source>
+                <target>Наступні 25</target>
+            </trans-unit>
+            <trans-unit id="demote">
+                <source>Demote</source>
+                <target>Понизити</target>
+            </trans-unit>
+            <trans-unit id="promote">
+                <source>Promote</source>
+                <target>Підвищити</target>
+            </trans-unit>
+            <trans-unit id="verify">
+                <source>Verify</source>
+                <target>Підтвердити</target>
+            </trans-unit>
+            <trans-unit id="error.oops">
+                <source>Oops! Page not found</source>
+                <target>Ой! Сторінку не знайдено</target>
+            </trans-unit>
+            <trans-unit id="error.req">
+                <source>We are sorry, but the page you requested was not found :(</source>
+                <target>Нам шкода, але сторінку яку ви шукаєте не знайдено :(</target>
+            </trans-unit>
+            <trans-unit id="login.signin">
+                <source>Please sign in</source>
+                <target>Будьласка уввійдіть</target>
+            </trans-unit>
+            <trans-unit id="login.remme">
+                <source> Remember me   /    </source>
+                <target>Запам'ятати мене   /    </target>
+            </trans-unit>
+            <trans-unit id="login.forgotpass">
+                <source>Forgot password?</source>
+                <target>Забули пароль?</target>
+            </trans-unit>
+            <trans-unit id="registr.repeatpass">
+                <source>Repeat password</source>
+                <target>Повторіть пароль</target>
+            </trans-unit>
+            <trans-unit id="registr.confirm">
+                <source>Confirm</source>
+                <target>Підтвердити</target>
+            </trans-unit>
+            <trans-unit id="posts.create">
+                <source>Create post</source>
+                <target>Створити пост</target>
+            </trans-unit>
+            <trans-unit id="posts.my">
+                <source>My posts</source>
+                <target>Мої пости</target>
+            </trans-unit>
+            <trans-unit id="posts.admin">
+                <source>Admin panel</source>
+                <target>Панель адміністратора</target>
+            </trans-unit>
+            <trans-unit id="posts.createdat">
+                <source>Created at</source>
+                <target>Дата створення</target>
+            </trans-unit>
+            <trans-unit id="posts.verified">
+                <source>Verified</source>
+                <target>Підтвердженно</target>
+            </trans-unit>
+            <trans-unit id="posts.photo">
+                <source>Photo</source>
+                <target>Фото</target>
+            </trans-unit>
+            <trans-unit id="posts.actions">
+                <source>Actions</source>
+                <target>Дії</target>
+            </trans-unit>
+            <trans-unit id="posts.edit">
+                <source>Edit</source>
+                <target>Редагувати</target>
+            </trans-unit>
+
+            <trans-unit id="posts.createnew">
+                <source>Create your new post!</source>
+                <target>Створіть новий пост!</target>
+            </trans-unit>
+            <trans-unit id="posts.uploadimage">
+                <source>Upload image for your's post.</source>
+                <target>Завантажте фото для свого поста.</target>
+            </trans-unit>
+            <trans-unit id="post.text">
+                <source>Post text</source>
+                <target>Текст</target>
+            </trans-unit>
+            <trans-unit id="post.create">
+                <source>Create</source>
+                <target>Створити</target>
+            </trans-unit>
+
+            <trans-unit id="app.login">
+                <source>Login</source>
+                <target>Уввійти</target>
+            </trans-unit>
+            <trans-unit id="app.registr">
+                <source>Create new account</source>
+                <target>Створити новий аккаунт</target>
+            </trans-unit>
 
         </body>
     </file>

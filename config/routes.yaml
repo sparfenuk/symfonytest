@@ -9,3 +9,6 @@
 #welcome:
 #  path: /welcome
 #  conttroller:
+homepage:
+  path: /
+  controller: App\Controller\PostController::index

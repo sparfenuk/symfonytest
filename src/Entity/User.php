@@ -20,11 +20,11 @@ class User implements UserInterface, \Serializable
     /**
      * The unique auto incremented primary key.
      *
-     * @var int|null
+     * @var int
      *
      * @ORM\Id
-     * @ORM\Column(type="integer", options={"unsigned": true})
-     * @ORM\GeneratedValue
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -87,7 +87,7 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Post" , mappedBy="User")
+     * @ORM\OneToMany(targetEntity="App\Entity\Post" , mappedBy="author")
      */
     private $posts;
 
@@ -95,6 +95,8 @@ class User implements UserInterface, \Serializable
     {
         $this->posts = new ArrayCollection();
         $dt = new \DateTime();
+
+        $this->setStatus(0);
         $this->setAuthKey(AppController::generateRandomString(30));
         $this->setCreatedAt($dt);
         $this->setUpdatedAt($dt);
@@ -321,6 +323,12 @@ class User implements UserInterface, \Serializable
     {
         return $this->posts;
     }
+
+    public function __toString()
+    {
+        return sprintf('%s : %s : %s',$this->id,$this->username,$this->email);
+    }
+
 
 
 

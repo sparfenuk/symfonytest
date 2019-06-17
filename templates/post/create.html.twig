@@ -1,18 +1,30 @@
 {% extends 'form_base.html.twig' %}
 
-{% block title %}Create your new post!{% endblock %}
+{% block title %}{{ 'Create your new post!' | trans}}{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
 
 {% block body %}
     {{ form_start(form) }}
-
+    <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <img id="blah" src="{{ asset('images/' ~ image_name | default('noimagePost.png')) }}" class="avatar img-circle img-thumbnail" alt="preview" width="100" height="150">
+        </div>
+    </div>
     {{ form_widget(form) }}
-{#    <div class="form-group row">#}
-{#        <div class="col-sm-2"></div>#}
-{#        <div class="col-sm-10">#}
-{#            <label> Upload Image:</label><br>#}
-{#            <input type="file" id="post_image" name="post[image]" accept="image/*"/>#}
-{#        </div>#}
-{#    </div>#}
+
+
+    {#    <div class="form-group row">#}
+    {#        <div class="col-sm-2"></div>#}
+    {#        <div class="col-sm-10">#}
+    {#            <label> Upload Image:</label><br>#}
+    {#            <input type="file" id="post_image" name="post[image]" accept="image/*"/>#}
+    {#        </div>#}
+    {#    </div>#}
+
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
@@ -27,9 +39,27 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-10">
             <button class="btn btn-success btn" type="submit">
-                Create
+                {{ 'Create'|trans }}
             </button>
         </div>
     </div>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 {% endblock %}

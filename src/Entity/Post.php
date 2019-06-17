@@ -12,17 +12,19 @@ class Post
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer", options={"unsigned": true})
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $authorId;
+//    /**
+//     * @ORM\Column(type="integer")
+//     */
+//    private $authorId;
 
     /**
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private $verifiedAdminId;
@@ -49,18 +51,29 @@ class Post
      */
     private $text;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
+     *
      */
     private $author;
     /**
      * @return User
      */
-    public function getAuthor():User
+    public function getAuthor()//:User
     {
         return $this->author;
     }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
+    }
+
 
 
 
@@ -83,24 +96,24 @@ class Post
         return $this;
     }
 
-    public function getAuthorId(): ?int
-    {
-        return $this->authorId;
-    }
-
-    public function setAuthorId(int $authorId): self
-    {
-        $this->authorId = $authorId;
-
-        return $this;
-    }
+//    public function getAuthorId(): ?int
+//    {
+//        return $this->authorId;
+//    }
+//
+//    public function setAuthorId(int $authorId): self
+//    {
+//        $this->authorId = $authorId;
+//
+//        return $this;
+//    }
 
     public function getVerifiedAdminId(): ?int
     {
         return $this->verifiedAdminId;
     }
 
-    public function setVerifiedAdminId(int $verifiedAdminId): self
+    public function setVerifiedAdminId(int $verifiedAdminId = null): self
     {
         $this->verifiedAdminId = $verifiedAdminId;
 

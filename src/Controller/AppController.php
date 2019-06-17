@@ -10,7 +10,7 @@ class AppController extends AbstractController
 {
     public static function debug($arr){
         echo '<pre>';
-        print_r($arr);
+        var_dump($arr);
         echo '</pre>';
     }
     public static function generateRandomString($length = 10) {

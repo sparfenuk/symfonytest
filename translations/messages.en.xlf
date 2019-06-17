@@ -22,7 +22,6 @@
                 <source>Recent updates</source>
                 <target>Recent updates</target>
             </trans-unit>
-
             <trans-unit id="register.terms">
                 <source>I agree to the terms of service</source>
                 <target>I agree to the terms of service</target>
@@ -47,22 +46,182 @@
                 <source>Register</source>
                 <target>Register</target>
             </trans-unit>
-
             <trans-unit id="notifications.none">
                 <source>You have not notifications</source>
                 <target>You have not notifications</target>
             </trans-unit>
-
-            <trans-unit id="email.registration">
-                <source>email.registration</source>
-                <target><![CDATA[<h3>Welcome to the app!</h3>
-<p>Hello %name%! You've registered into the app!</p>
-<p>Please confirm account by clicking this
-    <a href="%confirm-link%">link</a>.
-</p>
-<p>To login, go to <a href="%login-link%">login page</a>.</p>
-<p>Thanks!</p>]]></target>
+            <trans-unit id="posts.blog">
+                <source>Blog</source>
+                <target>Blog</target>
             </trans-unit>
+            <trans-unit id="posts.home">
+                <source>Home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="posts.welcome">
+                <source>Welcome</source>
+                <target>Welcome</target>
+            </trans-unit>
+
+            <trans-unit id="posts.Contact">
+                <source>Contact</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="posts.profile">
+                <source>Profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="posts.logout">
+                <source>Logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="posts.latest">
+                <source>Latest posts</source>
+                <target>Latest posts</target>
+            </trans-unit>
+            <trans-unit id="posts.obdate">
+                <source>Order by: date</source>
+                <target>Order by: date</target>
+            </trans-unit>
+            <trans-unit id="posts.obusername">
+                <source>Order by: username</source>
+                <target>Order by: username</target>
+            </trans-unit>
+            <trans-unit id="posts.obemail">
+                <source>Order by: email</source>
+                <target>Order by: email</target>
+            </trans-unit>
+            <trans-unit id="posts.image">
+                <source>Image</source>
+                <target>Image</target>
+            </trans-unit>
+            <trans-unit id="posts.author">
+                <source>Author</source>
+                <target>Author</target>
+            </trans-unit>
+            <trans-unit id="posts.email">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="posts.text">
+                <source>Text</source>
+                <target>Text</target>
+            </trans-unit>
+            <trans-unit id="posts.created">
+                <source>Created</source>
+                <target>Created</target>
+            </trans-unit>
+            <trans-unit id="posts.prev25">
+                <source>Prev 25</source>
+                <target>Prev 25</target>
+            </trans-unit>
+            <trans-unit id="posts.next25">
+                <source>Next 25</source>
+                <target>Next 25</target>
+            </trans-unit>
+            <trans-unit id="demote">
+                <source>demote</source>
+                <target>Demote</target>
+            </trans-unit>
+            <trans-unit id="promote">
+                <source>promote</source>
+                <target>Promote</target>
+            </trans-unit>
+            <trans-unit id="verify">
+                <source>verify</source>
+                <target>Verify</target>
+            </trans-unit>
+            <trans-unit id="error.oops">
+                <source>Oops! Page not found</source>
+                <target>Oops! Page not found</target>
+            </trans-unit>
+            <trans-unit id="error.req">
+                <source>we are sorry, but the page you requested was not found</source>
+                <target>We are sorry, but the page you requested was not found :(</target>
+            </trans-unit>
+            <trans-unit id="login.signin">
+                <source>Please sign in</source>
+                <target>Please sign in</target>
+            </trans-unit>
+            <trans-unit id="login.remme">
+                <source> Remember me   /    </source>
+                <target> Remember me   /    </target>
+            </trans-unit>
+            <trans-unit id="login.forgotpass">
+                <source>Forgot password?</source>
+                <target>Forgot password?</target>
+            </trans-unit>
+            <trans-unit id="registr.repeatpass">
+                <source>Repeat password</source>
+                <target>Repeat password</target>
+            </trans-unit>
+            <trans-unit id="registr.confirm">
+                <source>Confirm</source>
+                <target>Confirm</target>
+            </trans-unit>
+            <trans-unit id="posts.create">
+                <source>Create post</source>
+                <target>Create post</target>
+            </trans-unit>
+            <trans-unit id="posts.my">
+                <source>My posts</source>
+                <target>My posts</target>
+            </trans-unit>
+            <trans-unit id="posts.admin">
+                <source>Admin panel</source>
+                <target>Admin panel</target>
+            </trans-unit>
+            <trans-unit id="posts.createdat">
+                <source>Created at</source>
+                <target>Created at</target>
+            </trans-unit>
+            <trans-unit id="posts.verified">
+                <source>Verified</source>
+                <target>Verified</target>
+            </trans-unit>
+            <trans-unit id="posts.photo">
+                <source>Photo</source>
+                <target>Photo</target>
+            </trans-unit>
+            <trans-unit id="posts.actions">
+                <source>Actions</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="posts.edit">
+                <source>Edit</source>
+                <target>Edit</target>
+            </trans-unit>
+
+            <trans-unit id="posts.createnew">
+                <source>Create your new post!</source>
+                <target>Create your new post!</target>
+            </trans-unit>
+            <trans-unit id="posts.uploadimage">
+                <source>Upload image for your's post.</source>
+                <target>Upload image for your's post.</target>
+            </trans-unit>
+            <trans-unit id="post.text">
+                <source>Post text</source>
+                <target>Post text</target>
+            </trans-unit>
+            <trans-unit id="post.create">
+                <source>Create</source>
+                <target>Create</target>
+            </trans-unit>
+
+            <trans-unit id="app.login">
+                <source>Login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="app.registr">
+                <source>Create new account</source>
+                <target>Create new account</target>
+            </trans-unit>
+
+<!--            <trans-unit id="">-->
+<!--                <source></source>-->
+<!--                <target></target>-->
+<!--            </trans-unit>-->
         </body>
     </file>
 </xliff>

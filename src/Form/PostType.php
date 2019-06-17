@@ -16,7 +16,7 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('photo_name',FileType::class,['label' => 'Upload image for your\'s post.', 'required' => false])
+            ->add('photo_name',FileType::class,['data_class' => null, 'label' => 'Upload image for your\'s post.', 'required' => false,'attr' => ['onchange' => 'readURL(this);']])
             ->add('text',TextareaType::class,['label' => 'Post text','required' => true])
         ;
     }

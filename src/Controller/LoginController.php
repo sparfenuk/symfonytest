@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\User;
 use App\Form\RegistrationType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -66,7 +67,7 @@ class LoginController extends AppController
     public function registration(UserPasswordEncoderInterface $passwordEncoder, Request $request, \Swift_Mailer $mailer)
     {
         $user = new User();
-        $form = $this->createForm(RegistrationType::class);
+        $form = $this->createForm(RegistrationType::class,$user);
 
         $form->handleRequest($request);
 
@@ -74,20 +75,11 @@ class LoginController extends AppController
 //            self::debug($form);
 //            echo $request->request->get('username');
 //            echo $request->request->get('registration[username]');
-            $data = $form->getData();
 
-            $user->setUsername($data['username']);
-            $user->setEmail($data['email']);
-            $user->setPassword($passwordEncoder->encodePassword($user,$data['password']['first']));
-            $user->setStatus(0);
-            $user->setAuthKey(self::generateRandomString(30));
+
+            $user->setPassword($passwordEncoder->encodePassword($user,$user->getUsername()));
 
             $user->setIp($request->server->get('REMOTE_ADDR'));
-
-            $dt = new \DateTime();
-
-            $user->setCreatedAt($dt);
-            $user->setUpdatedAt($dt);
 
 //            $browser = get_browser(null,true);
 //            $user->setBrowser($browser['parent'].' '.$browser['platform']);
@@ -100,10 +92,10 @@ class LoginController extends AppController
             $entityManager->flush();
 
             $message = (new \Swift_Message('Hello Email'))
-                ->setFrom($data['email'])
-                ->setTo($data['email'])
+                ->setFrom($user->getEmail())
+                ->setTo($user->getEmail())
                 ->setBody(
-                    'To confirm your email go this link 127.0.0.1:8000/confirm/'.$user->getAuthKey()
+                    'To confirm your email go this link 127.0.0.1:8000'.$this->generateUrl('confirm',['key' => $user->getAuthKey()])
                 )
             ;
             $mailer->send($message);
@@ -118,16 +110,52 @@ class LoginController extends AppController
     }
 
     /**
+     * @Route("/profile", name="profile")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
+     * @throws \Exception
+     */
+    public function profile(Request $request,UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $form = $this->createForm(RegistrationType::class,$user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            if($user->getPassword() !== null)
+                $user->setPassword($passwordEncoder->encodePassword($user,$user->getPassword()));
+
+
+            $user->setUpdatedAt( new \DateTime());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+
+            $this->addFlash('success', 'You\'ve just updated your account.');
+            $this->redirect('app_login');
+        }
+        return $this->render('login/registry.html.twig',[
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
      * @Route("/confirm/{key}",name="confirm")
      * @param $key
      * @return Response
      */
-    public function confirm($key)
+    public function confirm($key,Request $request)
     {
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(['auth_key' => $key]);
+            ->findOneBy(['authKey' => $key]);
 
         if($user->getStatus() == 0)
             $user->setStatus(1);
@@ -135,13 +163,14 @@ class LoginController extends AppController
             $this->addFlash('error', 'You\'ve already confirmed your email.');
             return $this->render('login/registry.html.twig');
         }
+
         $user->setAuthKey(self::generateRandomString(30));
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($user);
         $entityManager->flush();
         $this->addFlash('success', 'You\'ve just confirmed your email.');
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_login', $request->query->all());
     }
 
 
@@ -168,7 +197,7 @@ class LoginController extends AppController
                     ->setFrom($user->getEmail())
                     ->setTo($user->getEmail())
                     ->setBody(
-                        'To confirm your email go this link 127.0.0.1:8000/change/'.$user->getAuthKey()
+                        'To confirm your email go this link 127.0.0.1:8000/ua/change/'.$user->getAuthKey()
                     );
                 $mailer->send($message);
 
@@ -196,7 +225,7 @@ class LoginController extends AppController
     {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(['auth_key' => $key]);
+            ->findOneBy(['authKey' => $key]);
 
         $form = $this->createFormBuilder()
             ->add('password', RepeatedType::class,[
@@ -210,7 +239,6 @@ class LoginController extends AppController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            self::debug($form->getData());
 
             $user->setPassword($passwordEncoder->encodePassword($user,$form->getData()['password']));
             $user->setAuthKey(self::generateRandomString(30));
@@ -229,4 +257,21 @@ class LoginController extends AppController
             'form' => $form->createView(),
         ]);
     }
+
+//    /**
+//     * @Route("/userposts", name="user_posts")
+//     * @return Response
+//     */
+//    public function posts()
+//    {
+//
+//        $posts = $user = $this->getDoctrine()
+//            ->getRepository(Post::class)
+//            ->findBy(['author' => $this->get('security.token_storage')->getToken()->getUser()]);
+//
+//
+//        return $this->render('login/posts_list.html.twig',[
+//            'posts' => $posts,
+//        ]);
+//    }
 }
