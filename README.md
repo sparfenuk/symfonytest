@@ -1,9 +1,11 @@
 # symfonytest
 
-#requirements:
+#requirements
+
 php >= 7.2
 
 mysql 5.6
+
 #launch
 
 clone this repository
