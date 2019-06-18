@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
     {
         for($i = 0; $i < 100;$i++){
             $post = new Post();
-            $post->setUserId(1);
+            $post->setAuthor($manager->getRepository(User::class)->find(1));
             $post->setCreatedAt(new \DateTime());
             $post->setUpdatedAt(new \DateTime());
             $post->setText(AppController::generateRandomString(100));
