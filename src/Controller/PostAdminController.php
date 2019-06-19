@@ -19,15 +19,16 @@ class PostAdminController extends CRUDController
         $object = $this->admin->getSubject();
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the post with id: %s', $id));
+            $this->addFlash('error',sprintf('unable to find the post with id: %s', $id));
         }
+        else {
 
-        $object->setVerifiedAdminId($this->get('security.token_storage')->getToken()->getUser()->getId());
+            $object->setVerifiedAdminId($this->get('security.token_storage')->getToken()->getUser()->getId());
 
-        $this->admin->update($object);
+            $this->admin->update($object);
 
-        $this->addFlash('success', 'successfully verified');
-
+            $this->addFlash('success', 'successfully verified');
+        }
 
         return new RedirectResponse(
             $this->admin->generateUrl('list', ['filter' => $this->admin->getFilterParameters()])

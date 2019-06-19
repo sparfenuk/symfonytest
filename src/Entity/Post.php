@@ -31,7 +31,15 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
+     *@Assert\File(
+     *      maxSize="5242880",
+     *      mimeTypes = {
+     *          "image/png",
+     *          "image/jpeg",
+     *          "image/jpg",
+     *          "image/gif"
+     *           }
+     *     )
      *
      */
     private $photoName;
@@ -120,12 +128,12 @@ class Post
         return $this;
     }
 
-    public function getPhotoName(): ?string
+    public function getPhotoName()
     {
         return $this->photoName;
     }
 
-    public function setPhotoName(?string $photoName): self
+    public function setPhotoName($photoName)
     {
         $this->photoName = $photoName;
 

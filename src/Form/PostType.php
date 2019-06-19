@@ -17,14 +17,15 @@ class PostType extends AbstractType
     {
         $builder
             ->add('photo_name',FileType::class,['data_class' => null, 'label' => 'Upload image for your\'s post.', 'required' => false,'attr' => ['onchange' => 'readURL(this);']])
-            ->add('text',TextareaType::class,['label' => 'Post text','required' => true])
+            ->add('text',TextareaType::class,['label' => 'Post text','required' => true,])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            //'data_class' => Post::class,
+            'data_class' => Post::class,
+            'validation_groups' => false
         ]);
     }
 }

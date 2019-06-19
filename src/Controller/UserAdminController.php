@@ -22,18 +22,22 @@ class UserAdminController extends CRUDController
         $object = $this->admin->getSubject();
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the user with id: %s', $id));
+            $this->addFlash('error',sprintf('unable to find the user with id: %s', $id));
         }
 
-        if($object->getStatus() == 'ROLE_USER')
+        if($object->getStatus() == 'ROLE_USER') {
             $object->setStatus(2);
-        else if($object->getStatus() == 'ROLE_MODERATOR')
+            $this->addFlash('success','user promoted');
+        }
+        else if($object->getStatus() == 'ROLE_MODERATOR') {
             $object->setStatus(3);
-        else throw new NotFoundHttpException(sprintf('unable to promote the user with id: %s', $id));
+            $this->addFlash('success','user promoted');
+        }
+        else $this->addFlash('error',sprintf('unable to promote the user with id: %s', $id));
 
         $this->admin->update($object);
 
-        $this->addFlash('success','user promoted');
+
         return new RedirectResponse($this->admin->generateUrl('list'));
 
 //        return new RedirectResponse(
@@ -50,18 +54,21 @@ class UserAdminController extends CRUDController
         $object = $this->admin->getSubject();
 
         if (!$object) {
-            throw new NotFoundHttpException(sprintf('unable to find the user with id: %s', $id));
+            $this->addFlash('error', sprintf('unable to find the user with id: %s', $id));
         }
 
-        if($object->getStatus() == 'ROLE_ADMIN')
+        if($object->getStatus() == 'ROLE_ADMIN') {
             $object->setStatus(2);
-        else if($object->getStatus() == 'ROLE_MODERATOR')
+            $this->addFlash('success','user demoted');
+        }
+        else if($object->getStatus() == 'ROLE_MODERATOR') {
             $object->setStatus(1);
-        else throw new NotFoundHttpException(sprintf('unable to demote the user with id: %s', $id));
+            $this->addFlash('success','user demoted');
+        }
+        else $this->addFlash('error',sprintf('unable to demote the user with id: %s', $id));
 
         $this->admin->update($object);
 
-        $this->addFlash('success','user demoted');
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
 

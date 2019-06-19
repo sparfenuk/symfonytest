@@ -44,11 +44,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('user_posts') }}">{{ 'My posts' | trans }}</a>
                         </li>
-                        {% if is_granted('ROLE_MODERATOR') %}
+                        {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{path('sonata_admin_dashboard') }}">{{ 'Admin panel' | trans }}</a>
                             </li>
+
+                        {% elseif is_granted('ROLE_ADMIN') == false and is_granted('ROLE_MODERATOR') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{absolute_url('/admin/app/post/list') }}">{{ 'Moderate posts' | trans }}</a>
+                            </li>
                         {% endif %}
+
                     {% endif %}
                 </ul>
             </div>
@@ -72,24 +78,16 @@
 
 
 
+                        {% set params = app.request.attributes.get('_route_params')|merge(app.request.attributes.get('_route_params')) %}
+                        {% set enParams = params|merge({'_locale': 'en'}) %}
+                        {% set uaParams = params|merge({'_locale': 'ua'}) %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path(app.request.attributes.get('_route'), enParams) }}">eng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path(app.request.attributes.get('_route'), uaParams) }}">ukr</a>
+                        </li>
 
-                    {% set req = app.request %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ absolute_url(
-                            path(
-                                req.attributes.get('_route'),
-                                req.attributes.get('_route_params')|merge({'_locale': 'en'})
-                            )
-                        ) }}">eng</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{absolute_url(
-                            path(
-                                req.attributes.get('_route'),
-                                req.attributes.get('_route_params')|merge({'_locale': 'ua'})
-                            )
-                        ) }}">ukr</a>
-                    </li>
 
                 </ul>
             </div>
@@ -97,7 +95,6 @@
 
     </nav>
 </header>
-
 <main role="main" class="container main">
     {% include 'flash_messages.html.twig' %}
 

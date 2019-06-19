@@ -42,10 +42,12 @@ class LoginController extends AppController
      */
     public function login(AuthenticationUtils $authenticationUtils):Response
     {
-
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+//        if($this->get('security.token_storage')->getToken()->getUser()->getId() !== null){
+//            $this
+//        }
         return $this->render('login/login.html.twig',['last_username' => $lastUsername, 'error' => $error]);
     }
 

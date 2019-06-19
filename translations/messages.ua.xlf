@@ -136,7 +136,7 @@
                 <target>Ой! Сторінку не знайдено</target>
             </trans-unit>
             <trans-unit id="error.req">
-                <source>We are sorry, but the page you requested was not found :(</source>
+                <source>we are sorry, but the page you requested was not found</source>
                 <target>Нам шкода, але сторінку яку ви шукаєте не знайдено :(</target>
             </trans-unit>
             <trans-unit id="login.signin">
