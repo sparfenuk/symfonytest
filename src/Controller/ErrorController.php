@@ -7,18 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class ErrorController extends AbstractController
 {
     /**
      * @Route("/error", name="error")
      */
-    public function index(Request $request)
+    public function index()
     {
-
-
-//        return $this->renderView('error/index.html.twig');
-        return $this->render('error/index.html.twig', [
-            'iserror' => false
-        ]);
+        return $this->render('error/index.html.twig');
     }
 }

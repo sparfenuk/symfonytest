@@ -1,0 +1,10 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field%}
+
+    <div style="width: 300px; margin: auto;">
+        <p style="word-wrap: break-word;">
+            {{ object.text | default('! no text !') }}
+        </p>
+    </div>
+{% endblock %}

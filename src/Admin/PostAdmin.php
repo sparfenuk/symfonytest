@@ -54,11 +54,12 @@ class PostAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('text')
+        $listMapper->add('text','string', ['template' => 'Admin/post_text.html.twig' ] )
             ->addIdentifier('createdAt')
             ->add('author.email')
             ->add('author.username')
             ->add('author.status')
+            ->add('photoName',null ,['template' => 'Admin/post_image.html.twig'])
             ->addIdentifier('verifiedAdminId')
             ->add('_action', 'actions', [
                 'actions' => [
